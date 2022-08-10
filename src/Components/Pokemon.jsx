@@ -28,7 +28,9 @@ const Pokemon = (props) => {
 			.catch((error) => {
 				console.log('There was an ERROR: ', error);
 			});
-		changeFavouriteArray(JSON.parse(localStorage.getItem('favourite')));
+		if (localStorage.getItem('favourite')) {
+			changeFavouriteArray(JSON.parse(localStorage.getItem('favourite')));
+		}
 	}, [props]);
 
 	const updateData = useCallback(async () => {
