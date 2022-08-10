@@ -1,0 +1,195 @@
+.pokemon-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-around;
+	background-color: rgb(255, 195, 195);
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	flex: 1;
+}
+
+.pokemon {
+	flex: 0 0 13%;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	background-color: rgb(255, 94, 94);
+	border: 5px dashed red;
+	box-sizing: border-box;
+	cursor: pointer;
+	transition: 0.1s linear;
+	position: relative;
+}
+
+.pokemon.favourite {
+	border: 5px dashed rgb(255, 99, 242);
+	background-color: rgb(253, 170, 246);
+}
+
+.pokemon.favourite:hover {
+	box-shadow: 2px 2px 100px rgb(255, 99, 242);
+}
+
+.pokemon .icon {
+	width: 150px;
+	height: 150px;
+	pointer-events: none;
+}
+
+.pokemon .icon img {
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.pokemon:hover {
+	animation: shake linear infinite 1s;
+	box-shadow: 2px 2px 100px red;
+}
+
+.pokemon .name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: white;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	height: 50px;
+	pointer-events: none;
+}
+
+.pokemon .type {
+	font-size: 16px;
+	color: yellow;
+	pointer-events: none;
+}
+
+.pokemon.favourite .type {
+	color: rgb(161, 29, 150);
+}
+
+.pokemon .stats {
+	display: flex;
+	flex-wrap: wrap;
+	text-align: center;
+	margin-bottom: 10px;
+	background: white;
+	border: 5px solid Red;
+	padding: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	pointer-events: none;
+}
+
+.pokemon.favourite .stats {
+	border: 5px solid rgb(255, 99, 242);
+}
+
+.pokemon .stats * {
+	flex: 50%;
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	pointer-events: none;
+}
+
+.pokemon .health i {
+	color: red;
+	-webkit-text-stroke: 2px black;
+	margin-right: 7px;
+}
+
+.pokemon .health {
+	border-right: 3px dashed gray;
+	border-bottom: 3px dashed gray;
+}
+
+.pokemon .defense i {
+	color: rgb(144, 214, 255);
+	-webkit-text-stroke: 2px black;
+	margin-right: 7px;
+}
+
+.pokemon .defense {
+	border-right: 3px dashed gray;
+}
+
+.pokemon .attack i {
+	color: rgb(153, 136, 136);
+	-webkit-text-stroke: 2px black;
+	margin-right: 7px;
+}
+
+.pokemon .attack {
+	border-bottom: 3px dashed gray;
+}
+
+.pokemon .addFavourite {
+	color: rgb(56, 56, 56);
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 30px;
+	margin-right: 10px;
+	margin-top: 5px;
+}
+
+.pokemon.favourite .addFavourite {
+	color: rgb(255, 255, 255);
+}
+
+.pokemon .speed i {
+	color: rgb(255, 238, 82);
+	-webkit-text-stroke: 2px black;
+	margin-right: 7px;
+}
+
+.pokeInfo {
+	width: 40vw;
+	height: 90vh;
+	position: fixed;
+	z-index: 5;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+}
+
+@keyframes shake {
+	0% {
+		transform: translate(1px, 1px) rotate(0deg);
+	}
+	10% {
+		transform: translate(-1px, -2px) rotate(-1deg);
+	}
+	20% {
+		transform: translate(-3px, 0px) rotate(1deg);
+	}
+	30% {
+		transform: translate(3px, 2px) rotate(0deg);
+	}
+	40% {
+		transform: translate(1px, -1px) rotate(1deg);
+	}
+	50% {
+		transform: translate(-1px, 2px) rotate(-1deg);
+	}
+	60% {
+		transform: translate(-3px, 1px) rotate(0deg);
+	}
+	70% {
+		transform: translate(3px, 1px) rotate(-1deg);
+	}
+	80% {
+		transform: translate(-1px, -1px) rotate(1deg);
+	}
+	90% {
+		transform: translate(1px, 2px) rotate(0deg);
+	}
+	100% {
+		transform: translate(1px, -2px) rotate(-1deg);
+	}
+}
