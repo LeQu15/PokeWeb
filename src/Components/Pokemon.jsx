@@ -16,6 +16,7 @@ const Pokemon = (props) => {
 	const [pokeInfo, changePokeInfo] = useState(null);
 	const [favouriteFlag, changeFavouriteFlag] = useState(false);
 
+	const favouriteButton = React.createRef(null);
 	const firstButton = React.createRef();
 	const secondButton = React.createRef();
 
@@ -110,7 +111,7 @@ const Pokemon = (props) => {
 			}
 			loadPokemonsData(newArray);
 		} else loadPokemonsData([]);
-	}, [index, props, inputValue, sortType, test, favouriteFlag]);
+	}, [index, inputValue, sortType, test, favouriteFlag, favouriteArray]);
 
 	useEffect(() => {
 		updateData();
@@ -132,81 +133,95 @@ const Pokemon = (props) => {
 		}
 	};
 
-	const favourite = (e) => {
-		console.log('ok');
-		const array = [...favouriteArray];
-		if (
-			!array.includes(e.target.parentNode.parentNode.getAttribute('data-name'))
-		) {
-			array.push(e.target.parentNode.parentNode.getAttribute('data-name'));
-		} else {
-			const index = array.indexOf(
-				e.target.parentNode.parentNode.getAttribute('data-name')
-			);
-			if (index !== -1) {
-				array.splice(index, 1);
+	const favourite = useCallback(
+		(e) => {
+			const array = [...favouriteArray];
+			if (
+				!array.includes(
+					e.target.parentNode.parentNode.getAttribute('data-name')
+				)
+			) {
+				array.push(e.target.parentNode.parentNode.getAttribute('data-name'));
+			} else {
+				const index = array.indexOf(
+					e.target.parentNode.parentNode.getAttribute('data-name')
+				);
+				if (index !== -1) {
+					array.splice(index, 1);
+				}
 			}
-		}
-		changeFavouriteArray(array);
-	};
+			changeFavouriteArray(array);
+		},
+		[favouriteArray]
+	);
 
-	useEffect(() => {
-		localStorage.setItem('favourite', JSON.stringify(favouriteArray));
-	}, [favouriteArray]);
-
-	const showFavourite = () => {
+	const showFavourite = useCallback(() => {
 		changeIndex(0);
 		if (favouriteArray.length > 0) {
 			if (favouriteFlag === true) {
+				favouriteButton.current.classList.remove('favouriteOn');
 				changeFavouriteFlag(false);
 			} else {
+				favouriteButton.current.classList.add('favouriteOn');
 				changeFavouriteFlag(true);
 			}
 		} else {
-			changeFavouriteFlag(false);
+			favouriteButton.current.classList.remove('favouriteOn');
 		}
-	};
+	}, [favouriteArray, favouriteButton, favouriteFlag]);
+
+	useEffect(() => {
+		if (!favouriteArray.length > 0) {
+			changeFavouriteFlag(false);
+			if (favouriteButton.current) {
+				favouriteButton.current.classList.remove('favouriteOn');
+			}
+		}
+		localStorage.setItem('favourite', JSON.stringify(favouriteArray));
+	}, [favouriteArray, favouriteButton]);
 
 	const closePokeInfo = () => {
 		changePokeInfo(null);
 	};
 
-	const updatePokeInfo = (e) => {
-		let pokemon = P.getPokemonByName(e.target.getAttribute('data-name'))
-			.then((response) => {
-				changePokeInfo(
-					<div className='pokeInfo'>
-						<button onClick={closePokeInfo}>X</button>
-						<div className='pokeName'>{response.name.replace(/-/g, ' ')}</div>
-						<div className='pokeIcon'>
-							<img src={response.sprites.front_default} alt={response.name} />
+	const updatePokeInfo = useCallback((e) => {
+		if (e.target.classList.contains('pokemon')) {
+			P.getPokemonByName(e.target.getAttribute('data-name'))
+				.then((response) => {
+					changePokeInfo(
+						<div className='pokeInfo'>
+							<button onClick={closePokeInfo}>X</button>
+							<div className='pokeName'>{response.name.replace(/-/g, ' ')}</div>
+							<div className='pokeIcon'>
+								<img src={response.sprites.front_default} alt={response.name} />
+							</div>
+							<div className='pokeStats'>
+								<div className='health'>
+									<i className='fa-solid fa-heart'></i>
+									{response.stats[0].base_stat}
+								</div>
+								<div className='attack'>
+									<i className='fa-solid fa-gun'></i>
+									{response.stats[1].base_stat}
+								</div>
+								<div className='defense'>
+									<i className='fa-solid fa-shield'></i>
+									{response.stats[2].base_stat}
+								</div>
+								<div className='speed'>
+									<i className='fa-solid fa-shoe-prints'></i>
+									{response.stats[5].base_stat}
+								</div>
+							</div>
+							<div>Work in progress</div>
 						</div>
-						<div className='pokeStats'>
-							<div className='health'>
-								<i className='fa-solid fa-heart'></i>
-								{response.stats[0].base_stat}
-							</div>
-							<div className='attack'>
-								<i className='fa-solid fa-gun'></i>
-								{response.stats[1].base_stat}
-							</div>
-							<div className='defense'>
-								<i className='fa-solid fa-shield'></i>
-								{response.stats[2].base_stat}
-							</div>
-							<div className='speed'>
-								<i className='fa-solid fa-shoe-prints'></i>
-								{response.stats[5].base_stat}
-							</div>
-						</div>
-						<div>Work in progress</div>
-					</div>
-				);
-			})
-			.catch((error) => {
-				console.log('There was an ERROR: ', error);
-			});
-	};
+					);
+				})
+				.catch((error) => {
+					console.log('There was an ERROR: ', error);
+				});
+		}
+	}, []);
 
 	const displayPokemon = useCallback(() => {
 		if (pokeDataArray.length > 0) {
@@ -289,7 +304,7 @@ const Pokemon = (props) => {
 			);
 			loadDisplay([element]);
 		}
-	}, [pokeDataArray, favouriteArray]);
+	}, [pokeDataArray, favouriteArray, favourite, updatePokeInfo]);
 
 	useEffect(() => {
 		displayPokemon();
@@ -320,7 +335,7 @@ const Pokemon = (props) => {
 		if (pokemonsLoaded) {
 			changeButtons();
 		}
-	}, [index, changeButtons, buttonArray]);
+	}, [index, changeButtons, buttonArray, pokemonsLoaded]);
 
 	const changeInputHandler = (e) => {
 		setInputValue(e.target.value);
@@ -341,7 +356,12 @@ const Pokemon = (props) => {
 						<div className='filters'>
 							<button onClick={sortPokemons}>Name</button>
 							<button onClick={sortPokemons}>Type</button>
-							<button className='favourite' onClick={showFavourite}>
+							<button
+								ref={favouriteButton}
+								className='favourite'
+								onClick={showFavourite}
+								disabled={favouriteArray.length > 0 ? false : true}
+							>
 								<i className='fa-solid fa-heart'></i>
 							</button>
 						</div>

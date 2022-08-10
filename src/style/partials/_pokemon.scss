@@ -158,6 +158,16 @@
 	background-color: white;
 }
 
+.favouriteOn {
+	border: 5px dashed rgb(255, 99, 242);
+	background-color: rgb(253, 170, 246);
+}
+
+main div button.favouriteOn:hover:not(button:disabled) {
+	border: 5px dashed rgb(255, 137, 245);
+	background-color: rgb(255, 202, 251);
+}
+
 @keyframes shake {
 	0% {
 		transform: translate(1px, 1px) rotate(0deg);
