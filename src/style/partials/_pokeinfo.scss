@@ -1,0 +1,155 @@
+.pokeInfo {
+	background-color: rgb(255, 123, 123);
+	border: 5px dashed red;
+	font-family: 'Silkscreen', cursive;
+}
+
+.pokeInfo.fav {
+	background-color: rgb(253, 170, 246);
+	border: 5px dashed rgb(255, 99, 242);
+}
+
+.pokeBackground {
+	position: fixed;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.pokeInfo button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-family: 'Silkscreen', cursive;
+}
+
+.pokeId {
+	color: white;
+	font-size: 30px;
+	padding-left: 10px;
+	text-shadow: 3px 3px 10px black;
+}
+
+.pokeHeader {
+	background-color: rgb(255, 81, 81);
+	border-bottom: 6px solid rgb(255, 48, 48);
+}
+
+.fav .pokeHeader {
+	background-color: rgb(255, 122, 244);
+	border-bottom: 6px solid rgb(255, 48, 255);
+}
+
+.fav .pokeHeader button {
+	background-color: rgb(253, 170, 246);
+	border: 5px dashed rgb(255, 99, 242);
+}
+
+.fav .pokeHeader button:hover {
+	background-color: rgb(255, 198, 250);
+	border: 5px dashed rgb(255, 134, 245);
+}
+
+.pokeName,
+.pokeType {
+	text-align: center;
+	width: 100%;
+	color: white;
+	font-size: 40px;
+	text-transform: capitalize;
+	text-shadow: 3px 3px 10px black;
+}
+
+.pokeType {
+	color: yellow;
+	padding-bottom: 10px;
+	font-size: 30px;
+}
+
+.fav .pokeType {
+	color: rgb(161, 29, 150);
+}
+
+.pokeIcon {
+	margin-top: 20px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	margin-top: 20px;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 0, 0, 1) 48%,
+		rgba(0, 0, 0, 1) 50%,
+		rgba(255, 255, 255, 1) 52%
+	);
+	border-radius: 300px;
+	border: 6px solid black;
+	box-shadow: 5px 5px 10px black;
+}
+
+.fav .pokeIcon {
+	background: linear-gradient(
+		180deg,
+		rgb(228, 87, 174) 48%,
+		rgba(0, 0, 0, 1) 50%,
+		rgba(255, 255, 255, 1) 52%
+	);
+}
+
+.pokeIcon img {
+	width: 100%;
+}
+
+.pokeStats {
+	margin-top: 40px;
+	color: white;
+	margin-left: 30px;
+	font-size: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+.pokeStats > * {
+	display: flex;
+	margin-right: 30px;
+	text-shadow: 3px 3px 10px black;
+}
+
+.pokeStats i {
+	color: rgb(255, 255, 255);
+	text-shadow: 3px 3px 10px black;
+	padding-right: 30px;
+}
+
+.abilities {
+	margin-top: 40px;
+	color: white;
+	margin-left: 30px;
+	font-size: 30px;
+	display: flex;
+	flex-direction: column;
+	text-shadow: 3px 3px 10px black;
+	list-style: none;
+}
+
+.abilities li {
+	margin-left: 15px;
+	text-shadow: 3px 3px 10px black;
+	display: flex;
+	align-items: center;
+}
+
+.abilities li::before {
+	content: '\2022';
+	font-size: 50px;
+	color: white;
+	text-shadow: 3px 3px 10px black;
+}

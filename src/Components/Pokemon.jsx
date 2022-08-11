@@ -191,31 +191,63 @@ const Pokemon = (props) => {
 			P.getPokemonByName(e.target.getAttribute('data-name'))
 				.then((response) => {
 					changePokeInfo(
-						<div className='pokeInfo'>
-							<button onClick={closePokeInfo}>X</button>
-							<div className='pokeName'>{response.name.replace(/-/g, ' ')}</div>
-							<div className='pokeIcon'>
-								<img src={response.sprites.front_default} alt={response.name} />
+						<div className='pokeBackground'>
+							<div
+								className={
+									e.target.classList.contains('favourite')
+										? 'pokeInfo fav'
+										: 'pokeInfo'
+								}
+							>
+								<div className='pokeHeader'>
+									<button onClick={closePokeInfo}>X</button>
+									<div className='pokeId'>{`#${response.id}`}</div>
+									<div className='pokeName'>
+										{response.name.replace(/-/g, ' ')}
+									</div>
+									<div className='pokeType'>{response.types[0].type.name}</div>
+								</div>
+								<div className='pokeIcon'>
+									<img
+										src={response.sprites.front_default}
+										alt={response.name}
+									/>
+								</div>
+								<div className='pokeStats'>
+									<div className='health'>
+										<i className='fa-solid fa-heart'></i>
+										Health: {response.stats[0].base_stat}
+									</div>
+									<div className='attack'>
+										<i className='fa-solid fa-gun'></i>
+										Attack: {response.stats[1].base_stat}
+									</div>
+									<div className='specattack'>
+										<i className='fa-solid fa-bomb'></i>
+										Special Attack: {response.stats[3].base_stat}
+									</div>
+									<div className='defense'>
+										<i className='fa-solid fa-shield'></i>
+										Defense: {response.stats[2].base_stat}
+									</div>
+									<div className='specdefense'>
+										<i className='fa-solid fa-shield-halved'></i>
+										Special Defense: {response.stats[4].base_stat}
+									</div>
+									<div className='speed'>
+										<i className='fa-solid fa-shoe-prints'></i>
+										Speed: {response.stats[5].base_stat}
+									</div>
+								</div>
+								<div>
+									<ul className='abilities'>
+										Abilities:
+										{response.abilities.map((elem, index) => (
+											<li key={index}>{elem.ability.name}</li>
+										))}
+									</ul>
+								</div>
 							</div>
-							<div className='pokeStats'>
-								<div className='health'>
-									<i className='fa-solid fa-heart'></i>
-									{response.stats[0].base_stat}
-								</div>
-								<div className='attack'>
-									<i className='fa-solid fa-gun'></i>
-									{response.stats[1].base_stat}
-								</div>
-								<div className='defense'>
-									<i className='fa-solid fa-shield'></i>
-									{response.stats[2].base_stat}
-								</div>
-								<div className='speed'>
-									<i className='fa-solid fa-shoe-prints'></i>
-									{response.stats[5].base_stat}
-								</div>
-							</div>
-							<div>Work in progress</div>
 						</div>
 					);
 				})
@@ -227,7 +259,7 @@ const Pokemon = (props) => {
 
 	const displayPokemon = useCallback(() => {
 		if (pokeDataArray.length > 0) {
-			changeLoaded(true);
+			//changeLoaded(true);
 			let array = pokeDataArray.map((elem, index) => (
 				<div
 					className={
@@ -388,7 +420,7 @@ const Pokemon = (props) => {
 							alt=''
 						/>
 					</div>
-					Loading...
+					<p>Loading...</p>
 				</div>
 			);
 		}
