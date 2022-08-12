@@ -66,24 +66,6 @@ main div button:disabled {
 	align-items: center;
 	font-family: 'Silkscreen', cursive;
 }
-div.animation {
-	width: 100vw;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	z-index: 10;
-	position: absolute;
-	background-color: black;
-	top: 0;
-	color: white;
-	flex-direction: column;
-	left: 0;
-	font-size: 30px;
-	font-family: 'Silkscreen', cursive;
-	text-transform: uppercase;
-	font-weight: bold;
-}
 
 input {
 	border: 5px dashed rgb(252, 80, 80);
@@ -94,34 +76,407 @@ input {
 	font-family: 'Silkscreen', cursive;
 }
 
-.lds-circle {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transform: translateZ(1px);
+@media (min-width: 320px) and (orientation: portrait) {
+	input {
+		font-size: 14px;
+	}
+
+	.filters > * {
+		width: 80px;
+	}
+
+	main div button {
+		font-size: 14px;
+	}
+
+	.pokemon .addFavourite {
+		font-size: 20px;
+	}
+
+	.pokemon .icon {
+		width: 120px;
+		height: 120px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 10px;
+		height: 30px;
+	}
+
+	.pokemon .type {
+		font-size: 9px;
+	}
+
+	.pokemon .stats {
+		font-size: 10px;
+		margin-top: 20px;
+		margin-bottom: 0;
+	}
 }
-.lds-circle > * {
-	display: inline-block;
-	width: 80%;
-	height: 80%;
-	margin: 18px;
-	border-radius: 50%;
-	background: #cef;
-	animation: lds-circle 10s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+@media (min-width: 375px) and (orientation: portrait) {
+	input {
+		font-size: 16px;
+	}
+
+	.filters > * {
+		width: 90px;
+	}
+
+	main div button {
+		font-size: 16px;
+	}
+
+	.pokemon .addFavourite {
+		font-size: 23px;
+	}
+
+	.pokemon .icon {
+		width: 150px;
+		height: 150px;
+		margin-top: 20px;
+	}
+
+	.pokemon .name {
+		font-size: 12px;
+		height: 40px;
+	}
+
+	.pokemon .type {
+		font-size: 10px;
+	}
+
+	.pokemon .stats {
+		font-size: 13px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
 }
-@keyframes lds-circle {
-	0%,
-	100% {
-		animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+
+@media (min-width: 768px) and (orientation: portrait) {
+	input {
+		font-size: 30px;
 	}
-	0% {
-		transform: rotateY(0deg);
+
+	.filters > * {
+		width: 150px;
 	}
-	50% {
-		transform: rotateY(1800deg);
-		animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+
+	main div button {
+		font-size: 25px;
 	}
-	100% {
-		transform: rotateY(3600deg);
+
+	.pokemon .addFavourite {
+		font-size: 30px;
+	}
+
+	.pokemon .icon {
+		width: 180px;
+		height: 180px;
+		margin-top: 20px;
+	}
+
+	.pokemon .name {
+		font-size: 22px;
+		height: 110px;
+	}
+
+	.pokemon .type {
+		font-size: 18px;
+	}
+
+	.pokemon .stats {
+		font-size: 22px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 912px) and (orientation: portrait) {
+	input {
+		font-size: 40px;
+	}
+
+	.filters > * {
+		width: 170px;
+	}
+
+	main div button {
+		font-size: 30px;
+	}
+
+	.pokemon .addFavourite {
+		font-size: 32px;
+	}
+
+	.pokemon .icon {
+		width: 200px;
+		height: 200px;
+		margin-top: 20px;
+	}
+
+	.pokemon .name {
+		font-size: 20px;
+		height: 100px;
+	}
+
+	.pokemon .type {
+		font-size: 18px;
+	}
+
+	.pokemon .stats {
+		font-size: 25px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 1024px) and (orientation: portrait) {
+	input {
+		font-size: 40px;
+	}
+
+	.filters > * {
+		width: 170px;
+	}
+
+	main div button {
+		font-size: 30px;
+	}
+
+	.pokemon .addFavourite {
+		font-size: 32px;
+	}
+
+	.pokemon .icon {
+		width: 220px;
+		height: 220px;
+		margin-top: 20px;
+	}
+
+	.pokemon .name {
+		font-size: 25px;
+		height: 120px;
+	}
+
+	.pokemon .type {
+		font-size: 20px;
+	}
+
+	.pokemon .stats {
+		font-size: 25px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 533px) and (orientation: landscape) {
+	input {
+		font-size: 18px;
+	}
+
+	.filters > * {
+		width: 110px;
+	}
+
+	main div button {
+		font-size: 18px;
+	}
+
+	.pokemon .addFavourite {
+		font-size: 25px;
+	}
+
+	.pokemon .icon {
+		width: 150px;
+		height: 150px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 14px;
+		height: 50px;
+	}
+
+	.pokemon .type {
+		font-size: 12px;
+	}
+
+	.pokemon .stats {
+		font-size: 12px;
+		margin-top: 30px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 667px) and (orientation: landscape) {
+	input {
+		font-size: 22px;
+	}
+
+	.filters > * {
+		width: 120px;
+	}
+
+	main div button {
+		font-size: 20px;
+	}
+
+	.pokemon .icon {
+		width: 180px;
+		height: 180px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 16px;
+		padding: 5px;
+		height: 60px;
+	}
+
+	.pokemon .type {
+		font-size: 14px;
+	}
+
+	.pokemon .stats {
+		font-size: 14px;
+		margin-top: 30px;
+		margin-bottom: 10px;
+	}
+}
+
+@media (min-width: 736px) and (orientation: landscape) {
+	input {
+		font-size: 25px;
+	}
+
+	.filters > * {
+		width: 140px;
+	}
+
+	main div button {
+		font-size: 20px;
+	}
+
+	.pokemon .icon {
+		width: 150px;
+		height: 150px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 14px;
+		padding: 5px;
+		height: 60px;
+	}
+
+	.pokemon .type {
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 1024px) and (orientation: landscape) {
+	input {
+		font-size: 30px;
+	}
+
+	.filters > * {
+		width: 150px;
+	}
+
+	main div button {
+		font-size: 24px;
+	}
+
+	.pokemon .icon {
+		width: 140px;
+		height: 140px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 16px;
+		padding: 5px;
+		height: 60px;
+	}
+
+	.pokemon .type {
+		font-size: 12px;
+	}
+}
+
+@media (min-width: 1366px) and (orientation: landscape) {
+	input {
+		font-size: 40px;
+	}
+
+	.filters > * {
+		width: 180px;
+	}
+
+	main div button {
+		font-size: 25px;
+	}
+
+	.pokemon .icon {
+		width: 150px;
+		height: 150px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 18px;
+		padding: 2px;
+		height: 60px;
+	}
+
+	.pokemon .type {
+		font-size: 14px;
+	}
+
+	.pokemon .stats {
+		font-size: 15px;
+	}
+}
+
+@media (min-width: 1920px) and (orientation: landscape) {
+	input {
+		font-size: 40px;
+	}
+
+	main div button {
+		font-size: 25px;
+	}
+
+	.pokemon .icon {
+		width: 150px;
+		height: 150px;
+		margin-top: 15px;
+	}
+
+	.pokemon .name {
+		font-size: 18px;
+		height: 50px;
+	}
+
+	.pokemon .type {
+		font-size: 16px;
+	}
+
+	.pokemon .stats {
+		font-size: 18px;
+	}
+
+	main div button {
+		font-size: 20px;
+	}
+
+	.filters > * {
+		width: 150px;
+	}
+
+	input {
+		font-size: 40px;
 	}
 }

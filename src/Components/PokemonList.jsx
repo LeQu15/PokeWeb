@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pokemon from './Pokemon';
 
 const PokemonList = () => {
@@ -59,9 +59,9 @@ const PokemonList = () => {
 							'zoroark-hisui',
 							'zygarde-10',
 						];
-						for (let i = 0; i < json.results.length; i++) {
-							if (!bannedPokemons.includes(json.results[i].name)) {
-								array.push(json.results[i].name);
+						for (let pokemon of json.results) {
+							if (!bannedPokemons.includes(pokemon.name)) {
+								array.push(pokemon.name);
 							}
 						}
 						loadPokemons(array);

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import Pokedex from 'pokedex-promise-v2';
+import Animation from './Animation';
+import SortPokemons from './SortPokemons';
 const P = new Pokedex();
 
 const Pokemon = (props) => {
@@ -16,7 +18,7 @@ const Pokemon = (props) => {
 	const [pokeInfo, changePokeInfo] = useState(null);
 	const [favouriteFlag, changeFavouriteFlag] = useState(false);
 
-	const favouriteButton = React.createRef(null);
+	const favouriteButton = React.createRef();
 	const firstButton = React.createRef();
 	const secondButton = React.createRef();
 
@@ -35,50 +37,7 @@ const Pokemon = (props) => {
 
 	const updateData = useCallback(async () => {
 		const newArray = [];
-		let array;
-		switch (sortType) {
-			case 'aZ':
-				array = test.sort((a, b) => {
-					if (a.name < b.name) {
-						return -1;
-					} else if (a.name > b.name) {
-						return 1;
-					} else return 0;
-				});
-				break;
-			case 'zA':
-				array = test.sort((a, b) => {
-					if (b.name < a.name) {
-						return -1;
-					} else if (b.name > a.name) {
-						return 1;
-					} else return 0;
-				});
-				break;
-			case 'typeFirst':
-				array = test.sort((a, b) => {
-					if (a.types[0].type.name < b.types[0].type.name) {
-						return -1;
-					} else if (a.types[0].type.name > b.types[0].type.name) {
-						return 1;
-					} else return 0;
-				});
-				break;
-			case 'typeLast':
-				array = test.sort((a, b) => {
-					if (b.types[0].type.name < a.types[0].type.name) {
-						return -1;
-					} else if (b.types[0].type.name > a.types[0].type.name) {
-						return 1;
-					} else return 0;
-				});
-				break;
-			default:
-				array = test.sort(function (a, b) {
-					return a.name - b.name;
-				});
-				break;
-		}
+		let array = SortPokemons(test, sortType);
 
 		array = array.filter(function (element) {
 			return element.name.startsWith(
@@ -119,7 +78,7 @@ const Pokemon = (props) => {
 		updateData();
 	}, [updateData]);
 
-	const sortPokemons = (e) => {
+	const changeSort = (e) => {
 		if (e.target.innerHTML === 'Name') {
 			if (sortType === 'aZ') {
 				changeSortType('zA');
@@ -133,6 +92,38 @@ const Pokemon = (props) => {
 				changeSortType('typeFirst');
 			}
 		}
+	};
+
+	const handleChangeIndex = (e) => {
+		if (e.target === firstButton.current) {
+			changeIndex(index - 1);
+		} else {
+			changeIndex(index + 1);
+		}
+	};
+
+	const changeButtons = useCallback(() => {
+		if (index === parseInt(buttonArray.length / 30)) {
+			secondButton.current.disabled = true;
+		} else {
+			secondButton.current.disabled = false;
+		}
+		if (index === 0) {
+			firstButton.current.disabled = true;
+		} else {
+			firstButton.current.disabled = false;
+		}
+	}, [secondButton, firstButton, index, buttonArray]);
+
+	useEffect(() => {
+		if (pokemonsLoaded) {
+			changeButtons();
+		}
+	}, [index, changeButtons, buttonArray, pokemonsLoaded]);
+
+	const changeInputHandler = (e) => {
+		setInputValue(e.target.value);
+		changeIndex(0);
 	};
 
 	const favourite = useCallback(
@@ -181,10 +172,6 @@ const Pokemon = (props) => {
 		}
 		localStorage.setItem('favourite', JSON.stringify(favouriteArray));
 	}, [favouriteArray, favouriteButton]);
-
-	const closePokeInfo = () => {
-		changePokeInfo(null);
-	};
 
 	const updatePokeInfo = useCallback((e) => {
 		if (e.target.classList.contains('pokemon')) {
@@ -257,9 +244,13 @@ const Pokemon = (props) => {
 		}
 	}, []);
 
+	const closePokeInfo = () => {
+		changePokeInfo(null);
+	};
+
 	const displayPokemon = useCallback(() => {
 		if (pokeDataArray.length > 0) {
-			//changeLoaded(true);
+			changeLoaded(true);
 			let array = pokeDataArray.map((elem, index) => (
 				<div
 					className={
@@ -344,38 +335,6 @@ const Pokemon = (props) => {
 		displayPokemon();
 	}, [pokeDataArray, displayPokemon]);
 
-	const handleChangeIndex = (e) => {
-		if (e.target === firstButton.current) {
-			changeIndex(index - 1);
-		} else {
-			changeIndex(index + 1);
-		}
-	};
-
-	const changeButtons = useCallback(() => {
-		if (index === parseInt(buttonArray.length / 30)) {
-			secondButton.current.disabled = true;
-		} else {
-			secondButton.current.disabled = false;
-		}
-		if (index === 0) {
-			firstButton.current.disabled = true;
-		} else {
-			firstButton.current.disabled = false;
-		}
-	}, [secondButton, firstButton, index, buttonArray]);
-
-	useEffect(() => {
-		if (pokemonsLoaded) {
-			changeButtons();
-		}
-	}, [index, changeButtons, buttonArray, pokemonsLoaded]);
-
-	const changeInputHandler = (e) => {
-		setInputValue(e.target.value);
-		changeIndex(0);
-	};
-
 	const loaded = () => {
 		if (pokemonsLoaded) {
 			return (
@@ -388,8 +347,8 @@ const Pokemon = (props) => {
 							value={inputValue}
 						></input>
 						<div className='filters'>
-							<button onClick={sortPokemons}>Name</button>
-							<button onClick={sortPokemons}>Type</button>
+							<button onClick={changeSort}>Name</button>
+							<button onClick={changeSort}>Type</button>
 							<button
 								ref={favouriteButton}
 								className='favourite'
@@ -412,17 +371,7 @@ const Pokemon = (props) => {
 				</>
 			);
 		} else {
-			return (
-				<div className='animation'>
-					<div className='lds-circle'>
-						<img
-							src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png'
-							alt=''
-						/>
-					</div>
-					<p>Loading...</p>
-				</div>
-			);
+			return <Animation />;
 		}
 	};
 

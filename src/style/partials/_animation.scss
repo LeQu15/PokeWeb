@@ -1,0 +1,67 @@
+div.animation {
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	z-index: 10;
+	position: absolute;
+	background-color: black;
+	top: 0;
+	color: white;
+	flex-direction: column;
+	left: 0;
+	font-size: 30px;
+	font-family: 'Silkscreen', cursive;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.lds-circle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translateZ(1px);
+}
+.lds-circle > * {
+	display: inline-block;
+	width: 80%;
+	height: 80%;
+	margin: 18px;
+	border-radius: 50%;
+	background: #cef;
+	animation: lds-circle 10s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+	0%,
+	100% {
+		animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+	}
+	0% {
+		transform: rotateY(0deg);
+	}
+	50% {
+		transform: rotateY(1800deg);
+		animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+	}
+	100% {
+		transform: rotateY(3600deg);
+	}
+}
+
+@media (orientation: landscape) {
+	.lds-circle {
+		width: 80%;
+		height: 80%;
+	}
+
+	.lds-circle > * {
+		display: inline-block;
+		width: 60vh;
+		height: 60vh;
+		margin: 8px;
+		border-radius: 50%;
+		background: #cef;
+		animation: lds-circle 10s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+	}
+}

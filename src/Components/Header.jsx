@@ -1,8 +1,8 @@
-import React from 'react';
 import logo from '../img/logo.png';
 import pokeball from '../img/pokeball.png';
 
-function Header(props) {
+
+function Header() {
 	return (
 		<header>
 			<div className='pokeballs'>

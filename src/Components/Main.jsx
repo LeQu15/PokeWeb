@@ -1,5 +1,4 @@
-import React from 'react';
-import PokemonList from './PokemonList.jsx';
+import PokemonList from './PokemonList';
 
 function Main() {
 	return (
