@@ -9,6 +9,20 @@ Everything you need to know about Pokemons in just one place!
 * [Sass](https://github.com/sass/dart-sass)
 * [PokeApi](https://pokeapi.co)
 
+## Screenshots :tv:
+
+<p align="center">
+    <img src="/src/img/s1.png" alt="Website">
+</p>
+
+<p align="center">
+    <img src="/src/img/s2.png" alt="Favourites">
+</p>
+
+<p align="center">
+    <img src="/src/img/s3.png" alt="PokeInfo">
+</p>
+
 ## Installation :floppy_disk:
 To install this project run:
 > npm install
